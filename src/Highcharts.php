@@ -3,6 +3,7 @@
 
 namespace Dokohler\Highcharts;
 
+use Illuminate\Support\Str;
 
 class Highcharts {
 
@@ -84,7 +85,7 @@ class Highcharts {
         // set variable the chart is stored in
         $this->name = $name ?? 'MyChart';
         // set container
-        $this->container = $container ?? str_random('6');
+        $this->container = $container ?? Str::random('6');
 
         // set type
         $this->type = $type ?? 'chart';
@@ -485,7 +486,7 @@ class Highcharts {
     public function presetVariables($chart)
     {
 
-        $series = str_replace('\/', '/', $this->series);
+        $series = Str::replace('\/', '/', $this->series);
 
 
         $variables =
@@ -516,7 +517,7 @@ class Highcharts {
         }
 
         $attributes =  json_encode(array_merge($this->getOptions(), $this->getAttributes()));
-        $chart_body = str_replace('"%series_variable%"', "{$this->name}ProcessedSeries", $attributes);
+        $chart_body = Str::replace('"%series_variable%"', "{$this->name}ProcessedSeries", $attributes);
 
         // Concat the chart
         $chart_content = $content_header;
